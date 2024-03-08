@@ -5,6 +5,9 @@ export default function initSocketServer(server: any, io: Server) {
     console.log('socket connected', socket.id);
 
     socket.on('joinRoom', async (roomName) => {
+      if (socket.rooms.has(roomName)) {
+        return;
+      }
       const socketsLength = (await io.in(roomName).fetchSockets()).length;
 
       if (socketsLength >= 2) {
@@ -23,6 +26,7 @@ export default function initSocketServer(server: any, io: Server) {
       if (!socket.rooms.has(data.room)) {
         return;
       }
+
       socket.to(data.room).emit('receiveCode', data.code);
     });
 
