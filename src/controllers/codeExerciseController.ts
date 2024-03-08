@@ -25,13 +25,18 @@ const getAllCodeExercises = catchAsync(
 
 const getCodeExercise = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const codeExercise: CodeExerciseType = await CodeExercise.findById(
-      req.params.id
-    );
+    let findBy: string | null = null;
+    if (req.query.findBy) {
+      findBy = req.query.findBy as string;
+    }
+
+    const codeExercise: CodeExerciseType = await CodeExercise.findOne({
+      [findBy ?? '_id']: req.params.id,
+    });
 
     if (!codeExercise) {
       return next(
-        new AppError('no code exercise found with the given id', 400)
+        new AppError('no code exercise found with the given id or field', 400)
       );
     }
 
@@ -65,7 +70,15 @@ const updateCodeExercise = catchAsync(
       return next(new AppError("You didn't send data to update", 400));
     }
 
-    const codeExercise = await CodeExercise.findByIdAndUpdate(
+    let codeExercise = await CodeExercise.findById(req.params.id);
+
+    if (!codeExercise) {
+      return next(
+        new AppError('no code exercise found with the provided ID', 400)
+      );
+    }
+
+    codeExercise = await CodeExercise.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
