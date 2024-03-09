@@ -106,7 +106,7 @@ const deleteCodeExercise = catchAsync(
       );
     }
 
-    CodeExercise.findByIdAndDelete(req.params.id);
+    await CodeExercise.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: 'success',
