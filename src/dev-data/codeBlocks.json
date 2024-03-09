@@ -1,22 +1,30 @@
 [
   {
-    "title": "Dates",
-    "code": "",
-    "solution": ""
+    "title": "Reverse a String",
+    "explanation": "Create a function that takes a string as an argument and returns the string reversed.",
+    "code": "function reverseString(str) {\n  // Your code here\n}",
+    "solution": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+    "level": "easy"
   },
   {
-    "title": "Using promises",
-    "code": "",
-    "solution": ""
+    "title": "FizzBuzz",
+    "explanation": "Write a function that takes a number as an argument. For multiples of 3, print 'Fizz' instead of the number. For multiples of 5, print 'Buzz'. For numbers that are multiples of both 3 and 5, print 'FizzBuzz'.",
+    "code": "function fizzBuzz(num) {\n  // Your code here\n}",
+    "solution": "function fizzBuzz(num) {\n  if (num % 3 === 0 && num % 5 === 0) {\n    return 'FizzBuzz';\n  } else if (num % 3 === 0) {\n    return 'Fizz';\n  } else if (num % 5 === 0) {\n    return 'Buzz';\n  } else {\n    return num.toString();\n  }\n}",
+    "level": "intermediate"
   },
   {
-    "title": "Destructure practice",
-    "code": "",
-    "solution": ""
+    "title": "Flatten an Array of Arrays",
+    "explanation": "Create a function that takes an array of arrays as an argument and returns a flattened array with all the elements from the nested arrays.",
+    "code": "function flattenArray(arr) {\n  // Your code here\n}",
+    "solution": "function flattenArray(arr) {\n  return arr.reduce((flat, next) => flat.concat(Array.isArray(next) ? flattenArray(next) : next), []);\n}",
+    "level": "hard"
   },
   {
-    "title": "Array methods",
-    "code": "",
-    "solution": ""
+    "title": "Async To Promises",
+    "explanation": "Given an asynchronous function that uses the async/await syntax, convert it to use promises with the then method.",
+    "code": "function fetchData() {\n  const data = await fetch('https://api.example.com/data');\n  const jsonData = await data.json();\n  return jsonData;\n}",
+    "solution": "function fetchData() {\n  return fetch('https://api.example.com/data')\n    .then(response => response.json())\n    .then(data => data);\n}",
+    "level": "expert"
   }
 ]
